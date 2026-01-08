@@ -14,11 +14,11 @@ def get_requirements(file_path:str)->List[str]:
     return requirements
 
 setup(
-    name = 'Fault Detection',
+    name = 'Wafer_Fault_Detection',
     version='0.0.1',
     author = 'Daizy Gupta',
-    author_mail = 'guptadaizy2495@gmail.com',
-    install_requirements = get_requirements('requirements.txt'),
+    author_email = 'guptadaizy2495@gmail.com',
+    install_requires = get_requirements('requirements.txt'),
     packages = find_packages()
 
 )
