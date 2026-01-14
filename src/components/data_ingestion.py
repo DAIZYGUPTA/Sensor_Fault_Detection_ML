@@ -3,7 +3,8 @@ import os
 import numpy as np
 import pandas as pd
 from pymongo import MongoClient
-from zipfile import Path
+from pathlib import Path
+#from zipfile import Path
 from src.constant import *
 from src.exception import CustomException
 from src.logger import logging
@@ -31,7 +32,7 @@ class DataIngestion:
         except Exception as e:
             raise CustomException(e,sys)
 
-    def export_data_into_feature_store_file_path(self)-> pd.DataFrame:
+    def export_data_into_feature_store_file_path(self)-> str:
 
         try:
             logging.info(f"Exporting data from mongodb")
@@ -42,11 +43,8 @@ class DataIngestion:
                 db_name = MONGO_DATABASE_NAME
             )
             logging.info(f"saving exported data into feature store file path :{raw_file_path}")
-
             feature_store_file_path = os.path.join(raw_file_path,'wafer_fault.csv')
-
             sensor_data.to_csv(feature_store_file_path,index=False)
-
             return feature_store_file_path
         
         except Exception as e:
@@ -60,7 +58,6 @@ class DataIngestion:
             feature_store_file_path = self.export_data_into_feature_store_file_path()
 
             logging.info("got the data from mongodb")
-
             logging.info("exited initiate_data_ingestion methos of data ingestion class")
 
             return feature_store_file_path
